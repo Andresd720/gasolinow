@@ -55,7 +55,7 @@ export class MITECOService {
       }),
       catchError(err => {
         console.error('Error al cargar precios MITECO', err);
-        return of([]); // o throwError(err) según necesidad
+        return of([]);
       })
     );
   }
