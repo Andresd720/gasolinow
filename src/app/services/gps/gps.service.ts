@@ -27,8 +27,11 @@ export class GpsService {
           observer.error('No se pudo obtener la ubicación: ' + err.message);
         },
         {
+          // Pide la ubicacion una vez no es continuo.
           enableHighAccuracy: true,
+          // 5segundos de espera, sino error
           timeout: 5000,
+          // noutiliza ubicacion cache solicita ubicacion al momento
           maximumAge: 0
         }
       );
