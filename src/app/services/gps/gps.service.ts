@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PosicionGps } from 'src/app/model/posicion-gps';
+import { PosicionGpsCoord } from 'src/app/model/posicion-gps';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GpsService {
 
-  obtenerPosicion(): Observable<PosicionGps> {
+  obtenerPosicion(): Observable<PosicionGpsCoord> {
     return new Observable(observer => {
 
       if (!navigator.geolocation) {
@@ -23,15 +23,15 @@ export class GpsService {
           });
           observer.complete();
         },
-        (err) => {
-          observer.error('No se pudo obtener la ubicación: ' + err.message);
+        (error) => {
+          observer.error('No se pudo obtener la ubicación: ' + error.message);
         },
         {
           // Pide la ubicacion una vez no es continuo.
           enableHighAccuracy: true,
-          // 5segundos de espera, sino error
-          timeout: 5000,
-          // noutiliza ubicacion cache solicita ubicacion al momento
+          // 15segundos de espera, sino error
+          timeout: 15000,
+          // noutiliza ubicacion cache solicita ubicacion reciente al momento
           maximumAge: 0
         }
       );
